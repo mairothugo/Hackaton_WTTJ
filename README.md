@@ -27,5 +27,6 @@ Office Pulse est un système d'automatisation no-code pensé pour améliorer la 
 
 ### 1. Cloner le projet
 ```bash
-git clone https://github.com/<votre-organisation>/office-pulse.git
-cd office-pulse
+git clone https://github.com/mairothugo/Hackaton_WTTJ.git
+cd Hackaton_WTTJ
+
