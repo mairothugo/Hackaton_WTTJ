@@ -1,0 +1,3211 @@
+{
+    "name": "Message slack",
+    "flow": [
+        {
+            "id": 2,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2235861
+            },
+            "mapper": {
+                "from": "drive",
+                "orderBy": "A",
+                "sheetId": "Sheet1",
+                "fieldType": "string",
+                "sortOrder": "asc",
+                "spreadsheetId": "11OWmWZAVEtGnAns0wtOi9fDHa5F2_mB8_sZ-olL2RFo",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "chose",
+                            "label": "Nom (A)"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet1"
+                        },
+                        "fieldType": {
+                            "mode": "chose",
+                            "label": "String"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Présence hebdomadaire"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gpelenga@eugeniaschool.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "fieldType",
+                        "type": "select",
+                        "label": "Field Type",
+                        "validate": {
+                            "enum": [
+                                "string",
+                                "number",
+                                "date"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Nom (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Prénom (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "Lundi  (C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "Mardi  (D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "Mercredi (E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "Jeudi (F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "Vendredi (G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "(H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "(I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "(J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "builtin:BasicFeeder",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "array": "{{2.`0`}} {{2.`1`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "array": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "mode": "edit",
+                        "name": "array",
+                        "spec": [],
+                        "type": "array",
+                        "label": "Array"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2235861
+            },
+            "mapper": {
+                "from": "drive",
+                "orderBy": "{{2.`0`}} {{2.`1`}}",
+                "sheetId": "Sheet2",
+                "fieldType": "string",
+                "sortOrder": "asc",
+                "spreadsheetId": "10tyOix2cLskEUqUtflTQGYvfaBwz6w4FVT1FN9lkCTI",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "filter": {
+                            "collapsed": true
+                        },
+                        "orderBy": {
+                            "mode": "edit"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet2"
+                        },
+                        "fieldType": {
+                            "mode": "chose",
+                            "label": "String"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Personnel de la base de données"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gpelenga@eugeniaschool.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "fieldType",
+                        "type": "select",
+                        "label": "Field Type",
+                        "validate": {
+                            "enum": [
+                                "string",
+                                "number",
+                                "date"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Employé (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Projet  (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "(C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "(D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "(E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "(F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "(G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "(H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "(I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "(J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 5,
+            "module": "builtin:BasicFeeder",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "array": "{{4.`1`}}{{4.`0`}} {{4.`5`}} {{4.`6`}} {{4.`7`}} {{4.`8`}} {{4.`9`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "array": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "mode": "edit",
+                        "name": "array",
+                        "spec": [],
+                        "type": "array",
+                        "label": "Array"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2235861
+            },
+            "mapper": {
+                "from": "drive",
+                "orderBy": " {{4.`0`}}{{4.`1`}} {{4.`3`}} {{4.`9`}} {{4.`2`}} {{4.`6`}} {{4.`8`}} {{4.`5`}}",
+                "sheetId": "Sheet2",
+                "fieldType": "string",
+                "sortOrder": "asc",
+                "spreadsheetId": "10tyOix2cLskEUqUtflTQGYvfaBwz6w4FVT1FN9lkCTI",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "edit"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet2"
+                        },
+                        "fieldType": {
+                            "mode": "chose",
+                            "label": "String"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Base de donnée personnel"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gpelenga@eugeniaschool.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "fieldType",
+                        "type": "select",
+                        "label": "Field Type",
+                        "validate": {
+                            "enum": [
+                                "string",
+                                "number",
+                                "date"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Employé (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Projet  (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "(C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "(D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "(E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "(F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "(G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "(H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "(I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "(J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "module": "builtin:BasicAggregator",
+            "version": 1,
+            "parameters": {
+                "feeder": 4
+            },
+            "mapper": {
+                "2": "{{2.`2`}}",
+                "3": "{{2.`3`}}",
+                "4": "{{2.`4`}}",
+                "5": "{{2.`5`}}",
+                "6": "{{2.`6`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                },
+                "restore": {
+                    "extra": {
+                        "feeder": {
+                            "label": "Google Sheets - Search Rows [4]"
+                        },
+                        "target": {
+                            "label": "Custom"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 9,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2235861
+            },
+            "mapper": {
+                "from": "drive",
+                "filter": [
+                    [
+                        {
+                            "a": "C",
+                            "b": "Oui",
+                            "o": "text:equal"
+                        },
+                        {
+                            "a": "D",
+                            "b": "Oui",
+                            "o": "text:equal"
+                        },
+                        {
+                            "a": "E",
+                            "b": "Oui",
+                            "o": "text:equal"
+                        },
+                        {
+                            "a": "F",
+                            "b": "Oui",
+                            "o": "text:equal"
+                        },
+                        {
+                            "a": "G",
+                            "b": "Oui",
+                            "o": "text:equal"
+                        }
+                    ]
+                ],
+                "sheetId": "Sheet1",
+                "sortOrder": "asc",
+                "spreadsheetId": "11OWmWZAVEtGnAns0wtOi9fDHa5F2_mB8_sZ-olL2RFo",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1500,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "chose"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet1"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Présence hebdomadaire"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gpelenga@eugeniaschool.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Nom (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Prénom (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "Lundi  (C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "Mardi  (D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "Mercredi (E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "Jeudi (F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "Vendredi (G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "(H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "(I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "(J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2235861
+            },
+            "mapper": {
+                "from": "drive",
+                "orderBy": "{{9.`0`}}",
+                "sheetId": "Sheet1",
+                "fieldType": "string",
+                "sortOrder": "asc",
+                "spreadsheetId": "1pwHeMEHXujO647p4RYvLCi1HdLUUDrta8LNuVd48R00",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1800,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "edit"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet1"
+                        },
+                        "fieldType": {
+                            "mode": "chose",
+                            "label": "String"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Projets"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gpelenga@eugeniaschool.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "fieldType",
+                        "type": "select",
+                        "label": "Field Type",
+                        "validate": {
+                            "enum": [
+                                "string",
+                                "number",
+                                "date"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Employé (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Projet  (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "(C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "(D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "(E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "(F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "(G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "(H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "(I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "(J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 12,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2235861
+            },
+            "mapper": {
+                "from": "drive",
+                "filter": [
+                    [
+                        {
+                            "a": "D",
+                            "b": "{{8.array[].`9`}}",
+                            "o": "text:equal"
+                        }
+                    ]
+                ],
+                "orderBy": "{{8.array[].`9`}}",
+                "sheetId": "Sheet1",
+                "fieldType": "string",
+                "sortOrder": "asc",
+                "spreadsheetId": "1DVI4SbM2WjIV4lym3ZyRSMJUovQqxhRRe_RylF0wG6w",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2100,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "edit"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet1"
+                        },
+                        "fieldType": {
+                            "mode": "chose",
+                            "label": "String"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Base d'activité"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gpelenga@eugeniaschool.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "fieldType",
+                        "type": "select",
+                        "label": "Field Type",
+                        "validate": {
+                            "enum": [
+                                "string",
+                                "number",
+                                "date"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Date (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Heure (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "Activité (C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "Lieu (D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "(E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "(F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "(G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "(H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "(I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "(J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 17,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2235861
+            },
+            "mapper": {
+                "from": "drive",
+                "sheetId": "Sheet1",
+                "sortOrder": "asc",
+                "spreadsheetId": "10tyOix2cLskEUqUtflTQGYvfaBwz6w4FVT1FN9lkCTI",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true,
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2400,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "orderBy": {
+                            "mode": "chose",
+                            "label": "Empty"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet1"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Base de donnée personnel"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection (gpelenga@eugeniaschool.com)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Nom (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Prénom (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "SlackId (C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "Equipe (D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "Poste (E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "Type de film préféré (F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "Ton hobbie (G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "sport préféré (H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "Plat préféré (I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "Lieu de travail  (J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 18,
+            "module": "builtin:BasicAggregator",
+            "version": 1,
+            "parameters": {
+                "feeder": 17
+            },
+            "mapper": {
+                "0": "{{17.`0`}}",
+                "1": "{{17.`1`}}",
+                "3": "{{17.`3`}}",
+                "4": "{{17.`4`}}",
+                "5": "{{17.`5`}}",
+                "6": "{{17.`6`}}",
+                "7": "{{17.`7`}}",
+                "8": "{{17.`8`}}",
+                "9": "{{17.`9`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 2700,
+                    "y": 0
+                },
+                "restore": {
+                    "extra": {
+                        "feeder": {
+                            "label": "Google Sheets - Search Rows [17]"
+                        },
+                        "target": {
+                            "label": "Custom"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "id": 19,
+            "module": "dust:talkToAgent",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 8775789
+            },
+            "mapper": {
+                "agent_configuration_id": "fdhz05JgXW",
+                "message": "{\r\n  \"inputs\": {\r\n    \"input\": \"Tu es un assistant RH Slack. Génère un message sympa pour {{9.`1`}}, qui vient au bureau les jours suivants : {{8.array[].`5`}}{{8.array[].`3`}}. Il travaille à {{8.array[].`9`}}, aime {{18.array[].`6`}}, {{18.array[].`5`}},{{18.array[].`8`}}? et son {{18.array[].`7`}} est dans l'équipe{{18.array[].`3`}} . Il croisera cette semaine : {{2.`0`}} {{2.`1`}}. Il partage un projet avec : {{10.`1`}}. Activités prévues à son bureau : {{18.array[].`9`}}{{12.`2`}}. Sois engageant, positif, et un peu fun.\" et tu simplement dire hey sans citer son prénom, evite de mettre des notes ou des information d'erreur dans le message \n}",
+                "username": "AgentRH",
+                "email": "team6@eugeniaschool.com",
+                "timezone": "UTC"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 3000,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My Dust connection (Connected to Dust (US))",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "dust2"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "agent_configuration_id": {
+                            "mode": "chose",
+                            "label": "AgentRH"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:dust2",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "agent_configuration_id",
+                        "type": "select",
+                        "label": "Agent",
+                        "required": true
+                    },
+                    {
+                        "name": "message",
+                        "type": "text",
+                        "label": "Message",
+                        "required": true
+                    },
+                    {
+                        "name": "username",
+                        "type": "text",
+                        "label": "Username",
+                        "required": true
+                    },
+                    {
+                        "name": "email",
+                        "type": "email",
+                        "label": "Email address",
+                        "required": true
+                    },
+                    {
+                        "name": "timezone",
+                        "type": "text",
+                        "label": "Timezone",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 22,
+            "module": "builtin:BasicRouter",
+            "version": 1,
+            "mapper": null,
+            "metadata": {
+                "designer": {
+                    "x": 3300,
+                    "y": 0
+                }
+            },
+            "routes": [
+                {
+                    "flow": [
+                        {
+                            "id": 15,
+                            "module": "slack:CreateMessage",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 3296977
+                            },
+                            "mapper": {
+                                "text": "{{19.agent_response}}",
+                                "parse": false,
+                                "mrkdwn": true,
+                                "channel": "C08URTH4E3H",
+                                "channelType": "private",
+                                "channelWType": "list"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 3821,
+                                    "y": -228
+                                },
+                                "restore": {
+                                    "expect": {
+                                        "parse": {
+                                            "mode": "chose"
+                                        },
+                                        "mrkdwn": {
+                                            "mode": "chose"
+                                        },
+                                        "channel": {
+                                            "mode": "chose",
+                                            "label": "team-6-test"
+                                        },
+                                        "link_names": {
+                                            "mode": "chose"
+                                        },
+                                        "channelType": {
+                                            "label": "Private channel"
+                                        },
+                                        "channelWType": {
+                                            "label": "Select from the list"
+                                        },
+                                        "unfurl_links": {
+                                            "mode": "chose"
+                                        },
+                                        "unfurl_media": {
+                                            "mode": "chose"
+                                        },
+                                        "reply_broadcast": {
+                                            "mode": "chose"
+                                        }
+                                    },
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "slack2"
+                                            },
+                                            "label": "My Slack (user) connection (gpelenga)"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:slack2,slack3",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "channelWType",
+                                        "type": "select",
+                                        "label": "Enter a channel ID or name",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "manualy",
+                                                "list"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "text",
+                                        "type": "text",
+                                        "label": "Text"
+                                    },
+                                    {
+                                        "name": "blocks",
+                                        "type": "text",
+                                        "label": "Blocks"
+                                    },
+                                    {
+                                        "name": "thread_ts",
+                                        "type": "text",
+                                        "label": "Thread message ID (time stamp)"
+                                    },
+                                    {
+                                        "name": "reply_broadcast",
+                                        "type": "boolean",
+                                        "label": "Reply broadcast"
+                                    },
+                                    {
+                                        "name": "link_names",
+                                        "type": "boolean",
+                                        "label": "Link names"
+                                    },
+                                    {
+                                        "name": "parse",
+                                        "type": "boolean",
+                                        "label": "Parse message text"
+                                    },
+                                    {
+                                        "name": "mrkdwn",
+                                        "type": "boolean",
+                                        "label": "Use markdown"
+                                    },
+                                    {
+                                        "name": "unfurl_links",
+                                        "type": "boolean",
+                                        "label": "Unfurl primarily text-based content"
+                                    },
+                                    {
+                                        "name": "unfurl_media",
+                                        "type": "boolean",
+                                        "label": "Unfurl media content"
+                                    },
+                                    {
+                                        "name": "icon_emoji",
+                                        "type": "text",
+                                        "label": "Icon emoji"
+                                    },
+                                    {
+                                        "name": "icon_url",
+                                        "type": "url",
+                                        "label": "Icon url"
+                                    },
+                                    {
+                                        "name": "username",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "channelType",
+                                        "type": "select",
+                                        "label": "Channel type",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "public",
+                                                "private",
+                                                "im",
+                                                "mpim"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "channel",
+                                        "type": "select",
+                                        "label": "Private channel",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "flow": [
+                        {
+                            "id": 23,
+                            "module": "dust:talkToAgent",
+                            "version": 1,
+                            "parameters": {
+                                "__IMTCONN__": 8775789
+                            },
+                            "mapper": {
+                                "agent_configuration_id": "fdhz05JgXW",
+                                "message": "{\r\n  \"inputs\": {\r\n    \"input\": \"Tu es un assistant RH spécialisé en météorologie bureau. Génère un message Slack personnalisé avec prévisions météo relationnelles.\r\n\r\nPROFIL COLLABORATEUR :\r\n- Nom : {{9.`1`}}\r\n- Jours de présence : {{2.`2`}}{{2.`3`}}{{2.`4`}}{{2.`5`}}{{2.`6`}}(attention \"Oui\" veut dire présent au bureau et \"Non\" veut dire absence)\n- Bureau :{{18.array[].`9`}}\r\n- Équipe : {{18.array[].`3`}}\r\n- Centres d'intérêt : {{18.array[].`6`}}, {{18.array[].`5`}}, {{18.array[].`8`}}\r\n- Poste : {{18.array[].`4`}}\r\nDONNÉES RELATIONNELLES :\r\n- Collègues présents simultanément : {{2.`0`}} {{2.`1`}}\r\n- Collaborateurs projet : {{10.`1`}}\r\n- Activités prévues : {{18.array[].`9`}} {{12.`2`}}\r\n\r\nMISSION : Crée un message structuré comme une météo avec :\r\n\r\n1. SALUTATION personnalisée\r\n2. MÉTÉO DE CHAQUE JOUR avec :\r\n   - Emoji météo (☀️🌤️⛅🌧️❄️) selon affluence/activités\r\n   - Température relationnelle (ex: 25°C collaboratif, 15°C focus)\r\n   - Condition (ex: Très animé, Modéré, Calme productif)\r\n   - Activités du jour avec horaires\r\n   - Collègues à croiser\r\n\r\n3. CONSEIL MÉTÉO personnalisé selon ses goûts\r\n4. SIGNATURE Office Vibes\r\n\r\nRÈGLES :\r\n- Ton décontracté et fun Welcome to the Jungle\r\n- Maximum 200 mots\r\n- Émojis météo obligatoires\r\n- Mentions personnalisées (goûts/projets)\r\n- Métaphores météorologiques créatives\n- Attention ne dis pas que tu vas faire l'action mets simplement la sctructure\r\n\r\nEXEMPLE STRUCTURE :\r\nSalut [Nom] ! 🌦️ Voici ta météo bureau :\r\n\r\n☀️ [JOUR] - [X]°C [ambiance]\r\n[Description + activités + collègues]\r\n\r\n[Conseil météo personnalisé]\r\n\r\nPrévisions Office Vibes ⚡\"\r\n  }\r\n}",
+                                "username": "AgentRH",
+                                "email": "team6@eugeniaschool.com",
+                                "timezone": "UTC"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 3600,
+                                    "y": 150
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Dust connection (Connected to Dust (US))",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "dust2"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "agent_configuration_id": {
+                                            "mode": "chose",
+                                            "label": "AgentRH"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:dust2",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "agent_configuration_id",
+                                        "type": "select",
+                                        "label": "Agent",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "message",
+                                        "type": "text",
+                                        "label": "Message",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "username",
+                                        "type": "text",
+                                        "label": "Username",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "email",
+                                        "type": "email",
+                                        "label": "Email address",
+                                        "required": true
+                                    },
+                                    {
+                                        "name": "timezone",
+                                        "type": "text",
+                                        "label": "Timezone",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": 24,
+                            "module": "slack:CreateMessage",
+                            "version": 4,
+                            "parameters": {
+                                "__IMTCONN__": 3296977
+                            },
+                            "mapper": {
+                                "channelWType": "list",
+                                "text": "{{23.agent_response}}",
+                                "parse": false,
+                                "mrkdwn": true,
+                                "channelType": "private",
+                                "channel": "C08URTH4E3H"
+                            },
+                            "metadata": {
+                                "designer": {
+                                    "x": 3900,
+                                    "y": 150
+                                },
+                                "restore": {
+                                    "parameters": {
+                                        "__IMTCONN__": {
+                                            "label": "My Slack (user) connection (gpelenga)",
+                                            "data": {
+                                                "scoped": "true",
+                                                "connection": "slack2"
+                                            }
+                                        }
+                                    },
+                                    "expect": {
+                                        "channelWType": {
+                                            "label": "Select from the list"
+                                        },
+                                        "reply_broadcast": {
+                                            "mode": "chose"
+                                        },
+                                        "link_names": {
+                                            "mode": "chose"
+                                        },
+                                        "parse": {
+                                            "mode": "chose"
+                                        },
+                                        "mrkdwn": {
+                                            "mode": "chose"
+                                        },
+                                        "unfurl_links": {
+                                            "mode": "chose"
+                                        },
+                                        "unfurl_media": {
+                                            "mode": "chose"
+                                        },
+                                        "channelType": {
+                                            "label": "Private channel"
+                                        },
+                                        "channel": {
+                                            "mode": "chose",
+                                            "label": "team-6-test"
+                                        }
+                                    }
+                                },
+                                "parameters": [
+                                    {
+                                        "name": "__IMTCONN__",
+                                        "type": "account:slack2,slack3",
+                                        "label": "Connection",
+                                        "required": true
+                                    }
+                                ],
+                                "expect": [
+                                    {
+                                        "name": "channelWType",
+                                        "type": "select",
+                                        "label": "Enter a channel ID or name",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "manualy",
+                                                "list"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "text",
+                                        "type": "text",
+                                        "label": "Text"
+                                    },
+                                    {
+                                        "name": "blocks",
+                                        "type": "text",
+                                        "label": "Blocks"
+                                    },
+                                    {
+                                        "name": "thread_ts",
+                                        "type": "text",
+                                        "label": "Thread message ID (time stamp)"
+                                    },
+                                    {
+                                        "name": "reply_broadcast",
+                                        "type": "boolean",
+                                        "label": "Reply broadcast"
+                                    },
+                                    {
+                                        "name": "link_names",
+                                        "type": "boolean",
+                                        "label": "Link names"
+                                    },
+                                    {
+                                        "name": "parse",
+                                        "type": "boolean",
+                                        "label": "Parse message text"
+                                    },
+                                    {
+                                        "name": "mrkdwn",
+                                        "type": "boolean",
+                                        "label": "Use markdown"
+                                    },
+                                    {
+                                        "name": "unfurl_links",
+                                        "type": "boolean",
+                                        "label": "Unfurl primarily text-based content"
+                                    },
+                                    {
+                                        "name": "unfurl_media",
+                                        "type": "boolean",
+                                        "label": "Unfurl media content"
+                                    },
+                                    {
+                                        "name": "icon_emoji",
+                                        "type": "text",
+                                        "label": "Icon emoji"
+                                    },
+                                    {
+                                        "name": "icon_url",
+                                        "type": "url",
+                                        "label": "Icon url"
+                                    },
+                                    {
+                                        "name": "username",
+                                        "type": "text",
+                                        "label": "User name"
+                                    },
+                                    {
+                                        "name": "channelType",
+                                        "type": "select",
+                                        "label": "Channel type",
+                                        "required": true,
+                                        "validate": {
+                                            "enum": [
+                                                "public",
+                                                "private",
+                                                "im",
+                                                "mpim"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "channel",
+                                        "type": "select",
+                                        "label": "Private channel",
+                                        "required": true
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": []
+    }
+}

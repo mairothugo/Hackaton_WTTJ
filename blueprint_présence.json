@@ -1,0 +1,697 @@
+{
+    "name": "Make1_recupération_présence",
+    "flow": [
+        {
+            "id": 2,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 8771876
+            },
+            "mapper": {
+                "from": "share",
+                "sheetId": "Sheet1",
+                "spreadsheetId": "10tyOix2cLskEUqUtflTQGYvfaBwz6w4FVT1FN9lkCTI",
+                "tableFirstRow": "A1:Z1",
+                "includesHeaders": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "from": {
+                            "label": "Select from all"
+                        },
+                        "orderBy": {
+                            "mode": "chose"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet1"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "empty": true
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "empty": true
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "empty": true
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            },
+                            "label": "My Google connection"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "text",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "text",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "type": "number",
+                        "label": "Row number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "type": "text",
+                        "label": "Spreadsheet ID"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "type": "text",
+                        "label": "Sheet"
+                    },
+                    {
+                        "name": "0",
+                        "type": "text",
+                        "label": "Nom (A)"
+                    },
+                    {
+                        "name": "1",
+                        "type": "text",
+                        "label": "Prénom (B)"
+                    },
+                    {
+                        "name": "2",
+                        "type": "text",
+                        "label": "SlackId (C)"
+                    },
+                    {
+                        "name": "3",
+                        "type": "text",
+                        "label": "Equipe (D)"
+                    },
+                    {
+                        "name": "4",
+                        "type": "text",
+                        "label": "Poste (E)"
+                    },
+                    {
+                        "name": "5",
+                        "type": "text",
+                        "label": "Type de film préféré (F)"
+                    },
+                    {
+                        "name": "6",
+                        "type": "text",
+                        "label": "Ton hobbie (G)"
+                    },
+                    {
+                        "name": "7",
+                        "type": "text",
+                        "label": "sport préféré (H)"
+                    },
+                    {
+                        "name": "8",
+                        "type": "text",
+                        "label": "Plat préféré (I)"
+                    },
+                    {
+                        "name": "9",
+                        "type": "text",
+                        "label": "Lieu de travail  (J)"
+                    },
+                    {
+                        "name": "10",
+                        "type": "text",
+                        "label": "(K)"
+                    },
+                    {
+                        "name": "11",
+                        "type": "text",
+                        "label": "(L)"
+                    },
+                    {
+                        "name": "12",
+                        "type": "text",
+                        "label": "(M)"
+                    },
+                    {
+                        "name": "13",
+                        "type": "text",
+                        "label": "(N)"
+                    },
+                    {
+                        "name": "14",
+                        "type": "text",
+                        "label": "(O)"
+                    },
+                    {
+                        "name": "15",
+                        "type": "text",
+                        "label": "(P)"
+                    },
+                    {
+                        "name": "16",
+                        "type": "text",
+                        "label": "(Q)"
+                    },
+                    {
+                        "name": "17",
+                        "type": "text",
+                        "label": "(R)"
+                    },
+                    {
+                        "name": "18",
+                        "type": "text",
+                        "label": "(S)"
+                    },
+                    {
+                        "name": "19",
+                        "type": "text",
+                        "label": "(T)"
+                    },
+                    {
+                        "name": "20",
+                        "type": "text",
+                        "label": "(U)"
+                    },
+                    {
+                        "name": "21",
+                        "type": "text",
+                        "label": "(V)"
+                    },
+                    {
+                        "name": "22",
+                        "type": "text",
+                        "label": "(W)"
+                    },
+                    {
+                        "name": "23",
+                        "type": "text",
+                        "label": "(X)"
+                    },
+                    {
+                        "name": "24",
+                        "type": "text",
+                        "label": "(Y)"
+                    },
+                    {
+                        "name": "25",
+                        "type": "text",
+                        "label": "(Z)"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "builtin:BasicFeeder",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "array": "{{2.`2`}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "array": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "mode": "edit",
+                        "name": "array",
+                        "spec": [],
+                        "type": "array",
+                        "label": "Array"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "slack:CreateMessage",
+            "version": 4,
+            "parameters": {
+                "__IMTCONN__": 8772506
+            },
+            "mapper": {
+                "text": "Hello ça va ? Tu peux nous ddire quand tu seras la stp ? Merci !\nhttps://forms.gle/WgwGMBF3W2DiHpAY6",
+                "parse": false,
+                "mrkdwn": true,
+                "channel": "{{2.`2`}}",
+                "channelType": "mpim",
+                "channelWType": "list"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "parse": {
+                            "mode": "chose"
+                        },
+                        "mrkdwn": {
+                            "mode": "chose"
+                        },
+                        "channel": {
+                            "mode": "edit"
+                        },
+                        "link_names": {
+                            "mode": "chose"
+                        },
+                        "channelType": {
+                            "label": "Direct message to multiple people"
+                        },
+                        "channelWType": {
+                            "label": "Select from the list"
+                        },
+                        "unfurl_links": {
+                            "mode": "chose"
+                        },
+                        "unfurl_media": {
+                            "mode": "chose"
+                        },
+                        "reply_broadcast": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "slack2"
+                            },
+                            "label": "Slack_WTTJ"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:slack2,slack3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "channelWType",
+                        "type": "select",
+                        "label": "Enter a channel ID or name",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "manualy",
+                                "list"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text"
+                    },
+                    {
+                        "name": "blocks",
+                        "type": "text",
+                        "label": "Blocks"
+                    },
+                    {
+                        "name": "thread_ts",
+                        "type": "text",
+                        "label": "Thread message ID (time stamp)"
+                    },
+                    {
+                        "name": "reply_broadcast",
+                        "type": "boolean",
+                        "label": "Reply broadcast"
+                    },
+                    {
+                        "name": "link_names",
+                        "type": "boolean",
+                        "label": "Link names"
+                    },
+                    {
+                        "name": "parse",
+                        "type": "boolean",
+                        "label": "Parse message text"
+                    },
+                    {
+                        "name": "mrkdwn",
+                        "type": "boolean",
+                        "label": "Use markdown"
+                    },
+                    {
+                        "name": "unfurl_links",
+                        "type": "boolean",
+                        "label": "Unfurl primarily text-based content"
+                    },
+                    {
+                        "name": "unfurl_media",
+                        "type": "boolean",
+                        "label": "Unfurl media content"
+                    },
+                    {
+                        "name": "icon_emoji",
+                        "type": "text",
+                        "label": "Icon emoji"
+                    },
+                    {
+                        "name": "icon_url",
+                        "type": "url",
+                        "label": "Icon url"
+                    },
+                    {
+                        "name": "username",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "channelType",
+                        "type": "select",
+                        "label": "Channel type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "public",
+                                "private",
+                                "im",
+                                "mpim"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "channel",
+                        "type": "select",
+                        "label": "Direct message to multiple people",
+                        "required": true
+                    },
+                    {
+                        "name": "channelWType",
+                        "type": "select",
+                        "label": "Enter a channel ID or name",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "manualy",
+                                "list"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "text",
+                        "type": "text",
+                        "label": "Text"
+                    },
+                    {
+                        "name": "blocks",
+                        "type": "text",
+                        "label": "Blocks"
+                    },
+                    {
+                        "name": "thread_ts",
+                        "type": "text",
+                        "label": "Thread message ID (time stamp)"
+                    },
+                    {
+                        "name": "reply_broadcast",
+                        "type": "boolean",
+                        "label": "Reply broadcast"
+                    },
+                    {
+                        "name": "link_names",
+                        "type": "boolean",
+                        "label": "Link names"
+                    },
+                    {
+                        "name": "parse",
+                        "type": "boolean",
+                        "label": "Parse message text"
+                    },
+                    {
+                        "name": "mrkdwn",
+                        "type": "boolean",
+                        "label": "Use markdown"
+                    },
+                    {
+                        "name": "unfurl_links",
+                        "type": "boolean",
+                        "label": "Unfurl primarily text-based content"
+                    },
+                    {
+                        "name": "unfurl_media",
+                        "type": "boolean",
+                        "label": "Unfurl media content"
+                    },
+                    {
+                        "name": "icon_emoji",
+                        "type": "text",
+                        "label": "Icon emoji"
+                    },
+                    {
+                        "name": "icon_url",
+                        "type": "url",
+                        "label": "Icon url"
+                    },
+                    {
+                        "name": "username",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "channelType",
+                        "type": "select",
+                        "label": "Channel type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "public",
+                                "private",
+                                "im",
+                                "mpim"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "channel",
+                        "type": "select",
+                        "label": "Direct message to multiple people",
+                        "required": true
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": []
+    }
+}
